@@ -115,10 +115,9 @@ public class PrimaryController implements Initializable {
                 tableViewTarefasPend.getItems().remove(tarefa);
                 listaTarefasConclu.add(tarefa);
                 tableViewTarefasConclu.getItems().add(tarefa);
+                alertaInfo("A tarefa foi marcada como concluída.");
             }
         }
-
-        alertaInfo("A tarefa foi marcada como concluída.");
     }
 
     private Tarefa carregaTarefa() {
