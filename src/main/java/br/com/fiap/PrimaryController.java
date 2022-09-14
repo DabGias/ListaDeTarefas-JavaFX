@@ -1,8 +1,8 @@
 package br.com.fiap;
 
+import br.com.fiap.model.Tarefa;
 import java.net.URL;
 import java.time.LocalDate;
-import br.com.fiap.model.Tarefa;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -29,6 +29,7 @@ public class PrimaryController implements Initializable {
     DatePicker datePickerData;
     @FXML
     Button btnSalvar;
+
     @FXML
     TableView<Tarefa> tableViewTarefas;
     @FXML
@@ -40,22 +41,84 @@ public class PrimaryController implements Initializable {
     @FXML
     TableColumn<Tarefa, LocalDate> tableColumnData;
     @FXML
-    TableColumn<Tarefa, Boolean> tableColumnStatus;
+    TableColumn<Tarefa, String> tableColumnStatus;
+
+    @FXML
+    TableView<Tarefa> tableViewTarefasPend;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnTituloPend;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnDescPend;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnCategoriaPend;
+    @FXML
+    TableColumn<Tarefa, LocalDate> tableColumnDataPend;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnStatusPend;
+
+    @FXML
+    TableView<Tarefa> tableViewTarefasConclu;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnTituloConclu;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnDescConclu;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnCategoriaConclu;
+    @FXML
+    TableColumn<Tarefa, LocalDate> tableColumnDataConclu;
+    @FXML
+    TableColumn<Tarefa, String> tableColumnStatusConclu;
+
+    @FXML
+    TextField txtFieldMarcarConclu;
+    @FXML
+    Button btnMarcarConclu;
+
     private List<Tarefa> listaTarefas = new ArrayList<>();
+    private List<Tarefa> listaTarefasPend = new ArrayList<>();
+    private List<Tarefa> listaTarefasConclu = new ArrayList<>();
 
     @FXML
     public void salvar() {
         Tarefa tarefa = carregaTarefa();
 
-        if (tarefa.getTitulo().length() > 0 && tarefa.getDesc().length() > 0 && tarefa.getCategoria().length() > 0 && tarefa.getData() != null) {
-            listaTarefas.add(tarefa);
-            System.out.println(listaTarefas);
-            tableViewTarefas.getItems().addAll(listaTarefas);
-            limpaTxt();
-            alertaInfo("A tarefa foi salva com sucesso.");
+        if (verTarefa(tarefa, listaTarefasPend)) {
+            alertaErro("Essa tarefa já existe!");
         } else {
-            alertaErro("A tarefa deve conter título, descrição, categoria e data.");
+            if (tarefa.getTitulo().length() > 0 && tarefa.getDesc().length() > 0 && tarefa.getCategoria().length() > 0 && tarefa.getData() != null) {
+                verStatus(tarefa);
+
+                System.out.println(tarefa);
+    
+                listaTarefas.add(tarefa);
+                tableViewTarefas.getItems().add(tarefa);
+                listaTarefasPend.add(tarefa);
+                tableViewTarefasPend.getItems().add(tarefa);
+
+                limpaTxt();
+                alertaInfo("A tarefa foi salva com sucesso.");
+            } else {
+                alertaErro("A tarefa deve conter título, descrição, categoria e data.");
+            }
         }
+    }
+
+    @FXML
+    public void marcarComoConclu() {
+        String nomeTarefa = txtFieldMarcarConclu.getText();
+
+        for (Tarefa tarefa : listaTarefasPend) {
+            if (nomeTarefa.toUpperCase().equals(tarefa.getTitulo().toUpperCase())) {
+                tarefa.setConcluida(true);
+                verStatus(tarefa);
+                listaTarefasPend.remove(tarefa);
+                tableViewTarefasPend.getItems().remove(tarefa);
+                listaTarefasConclu.add(tarefa);
+                tableViewTarefasConclu.getItems().add(tarefa);
+            }
+        }
+
+        alertaInfo("A tarefa foi marcada como concluída.");
     }
 
     private Tarefa carregaTarefa() {
@@ -65,6 +128,24 @@ public class PrimaryController implements Initializable {
         LocalDate data = datePickerData.getValue();
 
         return new Tarefa(titulo, desc, categoria, data);
+    }
+
+    private boolean verTarefa(Tarefa tarefa, List<Tarefa> listaTarefasPend) {
+        for (Tarefa tarefaPend : listaTarefasPend) {
+            if (tarefa.getTitulo().toUpperCase().equals(tarefaPend.getTitulo().toUpperCase())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void verStatus(Tarefa tarefa) {
+        if (tarefa.isConcluida()) {
+            tarefa.setStatus("Concluída");
+        } else {
+            tarefa.setStatus("Pendente");
+        }
     }
 
     public void limpaTxt() {
@@ -91,7 +172,19 @@ public class PrimaryController implements Initializable {
         tableColumnDesc.setCellValueFactory(new PropertyValueFactory<>("desc"));
         tableColumnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         tableColumnData.setCellValueFactory(new PropertyValueFactory<>("data"));
-        tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("concluida"));
+        tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        tableColumnTituloPend.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        tableColumnDescPend.setCellValueFactory(new PropertyValueFactory<>("desc"));
+        tableColumnCategoriaPend.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        tableColumnDataPend.setCellValueFactory(new PropertyValueFactory<>("data"));
+        tableColumnStatusPend.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        tableColumnTituloConclu.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        tableColumnDescConclu.setCellValueFactory(new PropertyValueFactory<>("desc"));
+        tableColumnCategoriaConclu.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        tableColumnDataConclu.setCellValueFactory(new PropertyValueFactory<>("data"));
+        tableColumnStatusConclu.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
 }

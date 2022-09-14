@@ -57,6 +57,14 @@ public class Tarefa {
         this.concluida = concluida;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String toString() {
         if (this.concluida) return this.titulo + ": " + this.desc + "\nData: " + this.data + "\nSituação: Concluída";
 
