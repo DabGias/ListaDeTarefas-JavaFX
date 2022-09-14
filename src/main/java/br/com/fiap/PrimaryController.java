@@ -106,9 +106,11 @@ public class PrimaryController implements Initializable {
     @FXML
     public void marcarComoConclu() {
         String nomeTarefa = txtFieldMarcarConclu.getText();
+        int procura = 0;
 
         for (Tarefa tarefa : listaTarefasPend) {
             if (nomeTarefa.toUpperCase().equals(tarefa.getTitulo().toUpperCase())) {
+                procura++;
                 tarefa.setConcluida(true);
                 verStatus(tarefa);
                 listaTarefasPend.remove(tarefa);
@@ -116,7 +118,13 @@ public class PrimaryController implements Initializable {
                 listaTarefasConclu.add(tarefa);
                 tableViewTarefasConclu.getItems().add(tarefa);
                 alertaInfo("A tarefa foi marcada como concluída.");
+                txtFieldMarcarConclu.setText("");
             }
+        }
+
+        if (procura == 0) {
+            alertaErro("Não há tarefas com esse nome.");
+            txtFieldMarcarConclu.setText("");
         }
     }
 
