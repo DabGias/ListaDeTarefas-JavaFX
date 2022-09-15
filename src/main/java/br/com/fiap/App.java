@@ -17,7 +17,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.setTitle("Task Manager");
-        Image icon = new Image("file:src/main/resources/br/com/fiap/icons/task_manager_icon.ico");
+        Image icon = new Image("file:src/main/resources/br/com/fiap/icons/task-manager-icon.png");
         stage.getIcons().add(icon);
         stage.show();
     }

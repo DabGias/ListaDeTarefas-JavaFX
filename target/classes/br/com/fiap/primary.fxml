@@ -99,11 +99,11 @@
                <content>
                   <TableView fx:id="tableViewTarefas" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn fx:id="tableColumnTitulo" prefWidth="111.0" text="Título" />
-                      <TableColumn fx:id="tableColumnDesc" prefWidth="179.0" text="Descrição" />
-                        <TableColumn fx:id="tableColumnCategoria" prefWidth="122.0" text="Categoria" />
-                        <TableColumn fx:id="tableColumnData" minWidth="0.0" prefWidth="103.0" text="Data" />
-                        <TableColumn fx:id="tableColumnStatus" minWidth="0.0" prefWidth="85.0" text="Status" />
+                      <TableColumn fx:id="tableColumnTitulo" minWidth="0.0" prefWidth="0.0" text="Título" />
+                      <TableColumn fx:id="tableColumnDesc" minWidth="0.0" prefWidth="0.0" text="Descrição" />
+                        <TableColumn fx:id="tableColumnCategoria" minWidth="0.0" prefWidth="0.0" text="Categoria" />
+                        <TableColumn fx:id="tableColumnData" minWidth="0.0" prefWidth="0.0" text="Data" />
+                        <TableColumn fx:id="tableColumnStatus" minWidth="0.0" prefWidth="0.0" text="Status" />
                     </columns>
                      <BorderPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -118,11 +118,11 @@
                <content>
                   <TableView fx:id="tableViewTarefasPend" prefHeight="200.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn fx:id="tableColumnTituloPend" prefWidth="113.0" text="Título" />
-                        <TableColumn fx:id="tableColumnDescPend" prefWidth="237.0" text="Descrição" />
-                        <TableColumn fx:id="tableColumnCategoriaPend" prefWidth="98.0" text="Categoria" />
-                        <TableColumn fx:id="tableColumnDataPend" prefWidth="82.0" text="Data" />
-                        <TableColumn fx:id="tableColumnStatusPend" prefWidth="70.0" text="Status" />
+                        <TableColumn fx:id="tableColumnTituloPend" prefWidth="120.0" text="Título" />
+                        <TableColumn fx:id="tableColumnDescPend" prefWidth="120.0" text="Descrição" />
+                        <TableColumn fx:id="tableColumnCategoriaPend" prefWidth="120.0" text="Categoria" />
+                        <TableColumn fx:id="tableColumnDataPend" prefWidth="120.0" text="Data" />
+                        <TableColumn fx:id="tableColumnStatusPend" prefWidth="120.0" text="Status" />
                      </columns>
                   </TableView>
                </content>
@@ -131,11 +131,11 @@
                <content>
                   <TableView fx:id="tableViewTarefasConclu" prefHeight="200.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn fx:id="tableColumnTituloConclu" prefWidth="119.0" text="Título" />
-                        <TableColumn fx:id="tableColumnDescConclu" prefWidth="236.0" text="Descrição" />
-                        <TableColumn fx:id="tableColumnCategoriaConclu" prefWidth="90.0" text="Categoria" />
-                        <TableColumn fx:id="tableColumnDataConclu" prefWidth="73.0" text="Data" />
-                        <TableColumn fx:id="tableColumnStatusConclu" prefWidth="82.0" text="Status" />
+                        <TableColumn fx:id="tableColumnTituloConclu" prefWidth="120.0" text="Título" />
+                        <TableColumn fx:id="tableColumnDescConclu" prefWidth="120.0" text="Descrição" />
+                        <TableColumn fx:id="tableColumnCategoriaConclu" prefWidth="120.0" text="Categoria" />
+                        <TableColumn fx:id="tableColumnDataConclu" prefWidth="120.0" text="Data" />
+                        <TableColumn fx:id="tableColumnStatusConclu" prefWidth="120.0" text="Status" />
                      </columns>
                   </TableView>
                </content>

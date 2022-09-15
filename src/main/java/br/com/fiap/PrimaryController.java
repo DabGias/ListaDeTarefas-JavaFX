@@ -108,15 +108,18 @@ public class PrimaryController implements Initializable {
         String nomeTarefa = txtFieldMarcarConclu.getText();
         int procura = 0;
 
-        for (Tarefa tarefa : listaTarefasPend) {
-            if (nomeTarefa.toUpperCase().equals(tarefa.getTitulo().toUpperCase())) {
+        for (Tarefa tarefaPend : listaTarefasPend) {
+            if (nomeTarefa.toUpperCase().trim().equals(tarefaPend.getTitulo().toUpperCase().trim())) {
                 procura++;
-                tarefa.setConcluida(true);
-                verStatus(tarefa);
-                listaTarefasPend.remove(tarefa);
-                tableViewTarefasPend.getItems().remove(tarefa);
-                listaTarefasConclu.add(tarefa);
-                tableViewTarefasConclu.getItems().add(tarefa);
+                tarefaPend.setConcluida(true);
+                verStatus(tarefaPend);
+                tableViewTarefas.getItems().remove(tarefaPend);
+                tableViewTarefas.getItems().add(tarefaPend);
+                listaTarefasPend.remove(tarefaPend);
+                tableViewTarefasPend.getItems().remove(tarefaPend);
+                listaTarefasConclu.add(tarefaPend);
+                tableViewTarefasConclu.getItems().add(tarefaPend);
+
                 alertaInfo("A tarefa foi marcada como concluída.");
                 txtFieldMarcarConclu.setText("");
             }
@@ -129,9 +132,9 @@ public class PrimaryController implements Initializable {
     }
 
     private Tarefa carregaTarefa() {
-        String titulo = txtFieldTitulo.getText();
-        String desc = txtAreaDesc.getText();
-        String categoria = txtFieldCategoria.getText();
+        String titulo = txtFieldTitulo.getText().trim();
+        String desc = txtAreaDesc.getText().trim();
+        String categoria = txtFieldCategoria.getText().trim();
         LocalDate data = datePickerData.getValue();
 
         return new Tarefa(titulo, desc, categoria, data);
